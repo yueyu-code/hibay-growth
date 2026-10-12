@@ -1,62 +1,467 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HiBay 增长周报｜10.2–10.8</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Barlow+Condensed:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Hibay 增长周报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Barlow+Semi+Condensed:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:#f5f7fb;--panel:#fff;--line:#e3e7ef;--grid:#edf0f5;--ink:#141a26;--ink-2:#4b5566;--ink-3:#7d8697;--accent:#2f6fe4;--up:#1a8a55;--up-soft:#e3f4ea;--down:#c7432f;--down-soft:#fbe9e5;--warn:#a8620a;--warn-soft:#fdf2e1;--f:"Noto Sans SC","PingFang SC",sans-serif;--f-num:"Barlow Condensed","Arial Narrow",sans-serif;--f-mono:"JetBrains Mono",monospace;color-scheme:light}
+/* Layout: summary first (KPI → 结论/跟踪) then detail charts in a 2-col grid that stacks at phone width */
+:root{
+  --bg:#f5f7fb; --panel:#ffffff; --line:#e3e7ef; --grid:#edf0f5;
+  --ink:#141a26; --ink-2:#4b5566; --ink-3:#7d8697;
+  --accent:#2f6fe4; --accent-soft:#e8f0fe;
+  --up:#1a8a55; --up-soft:#e3f4ea; --down:#c7432f; --down-soft:#fbe9e5;
+  --warn:#a8620a; --warn-soft:#fdf2e1;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#b4bac6;
+  --f-body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --f-num:"Barlow Semi Condensed","DIN Alternate","Arial Narrow",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12151c; --panel:#1a1f29; --line:#2a313e; --grid:#232a36;
+  --ink:#eef1f6; --ink-2:#b3bbc8; --ink-3:#848d9c;
+  --accent:#5b93f0; --accent-soft:#1d2b45;
+  --up:#4cc38a; --up-soft:#16301f; --down:#ef7a66; --down-soft:#3a1f1a;
+  --warn:#e4a34a; --warn-soft:#33260f;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#5d6573;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151c; --panel:#1a1f29; --line:#2a313e; --grid:#232a36;
+  --ink:#eef1f6; --ink-2:#b3bbc8; --ink-3:#848d9c;
+  --accent:#5b93f0; --accent-soft:#1d2b45;
+  --up:#4cc38a; --up-soft:#16301f; --down:#ef7a66; --down-soft:#3a1f1a;
+  --warn:#e4a34a; --warn-soft:#33260f;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#5d6573;
+  color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px var(--f);line-height:1.55}
-.wrap{max-width:760px;margin:0 auto;padding:24px 18px 40px;display:grid;gap:14px}
-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:6px 16px}
-h1{font-size:20px;margin:0;font-weight:700}
-.meta{color:var(--ink-3);font-size:12px}.meta b{color:var(--ink-2);font-weight:500;font-family:var(--f-mono)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 13px;display:grid;gap:3px}
-.kpi .lab{font-size:12px;color:var(--ink-2)}
-.kpi .val{font-family:var(--f-num);font-weight:600;font-size:30px;line-height:1.08;font-variant-numeric:tabular-nums}
-.kpi .row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);flex-wrap:wrap}
-.chip{display:inline-flex;align-items:center;font-size:11px;font-family:var(--f-mono);padding:1px 7px;border-radius:99px}
-.chip.up{color:var(--up);background:var(--up-soft)}.chip.down{color:var(--down);background:var(--down-soft)}.chip.flat{color:var(--ink-3);background:var(--grid)}
-.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 15px}
-.sec h2{font-size:13.5px;margin:0 0 10px;font-weight:700}
-.cstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.cstat{padding:8px 10px;border:1px solid var(--grid);border-radius:8px;display:grid;gap:2px}
-.cstat .lab{font-size:11.5px;color:var(--ink-2)}.cstat .val{font-family:var(--f-num);font-weight:600;font-size:22px;font-variant-numeric:tabular-nums}
-.cstat .row{font-size:10.5px;color:var(--ink-3)}
-.ch{font-family:var(--f-mono);font-size:10.5px;padding:0 5px;border-radius:99px}.ch.up{color:var(--up);background:var(--up-soft)}.ch.down{color:var(--down);background:var(--down-soft)}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.note{border-radius:10px;padding:12px 15px;border:1px solid var(--line);background:var(--panel)}
-.note h2{font-size:13px;margin:0 0 6px;font-weight:700}
-.note p{margin:0;color:var(--ink-2);font-size:12.5px}
-.note.sum h2{color:var(--accent)}.note.track{background:var(--warn-soft);border-color:transparent}.note.track h2{color:var(--warn)}
-table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
-th{text-align:right;color:var(--ink-3);font-weight:500;padding:4px 8px;border-bottom:1px solid var(--line);font-size:11px}
-th:first-child{text-align:left}td{text-align:right;padding:4px 8px;border-bottom:1px solid var(--grid)}
-td:first-child{text-align:left;color:var(--ink-2)}
-@media(max-width:620px){.kpis,.cstats,.cols{grid-template-columns:1fr 1fr}}
-</style></head><body><div class="wrap">
-<header><h1>HiBay 增长周报</h1><div class="meta">统计周 <b>10.2–10.8</b> · 对比 <b>9.25–10.1</b> · 神策 mojohi + 内容台账 · 生成于 2026-10-12</div></header>
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:28px 48px;display:grid;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px}
+h1{font-size:24px;margin:0;font-weight:700;text-wrap:balance;letter-spacing:.01em}
+.meta{color:var(--ink-3);font-size:13px}
+.meta b{color:var(--ink-2);font-weight:500}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 10px;display:grid;gap:4px;min-width:0}
+.kpi .lab{font-size:13px;color:var(--ink-2)}
+.kpi .val{font-family:var(--f-num);font-weight:600;font-size:36px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi .val small{font-size:18px;color:var(--ink-3);font-weight:500;margin-left:2px}
+.chip{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-family:var(--f-mono);padding:1px 7px;border-radius:99px;width:max-content}
+.chip.up{color:var(--up);background:var(--up-soft)} .chip.down{color:var(--down);background:var(--down-soft)} .chip.flat{color:var(--ink-3);background:var(--grid)}
+.kpi .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)}
+.kpi svg{display:block;width:100%;height:34px;margin-top:4px}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.note{border-radius:10px;padding:14px 18px;border:1px solid var(--line);background:var(--panel);min-width:0}
+.note h2{font-size:14px;margin:0 0 6px;font-weight:700}
+.note p{margin:0;color:var(--ink-2)}
+.note.sum h2{color:var(--accent)}
+.note.track{background:var(--warn-soft);border-color:transparent}
+.note.track h2{color:var(--warn)}
+.note.track p{color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0;display:grid;gap:8px;align-content:start}
+.panel.wide{grid-column:1/-1}
+.panel h3{margin:0;font-size:14px;font-weight:700}
+.panel .sub{font-size:12px;color:var(--ink-3);margin-top:-6px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--ink-3);font-family:var(--f-mono);font-size:11px}
+.chart .vlab{fill:var(--ink-2);font-size:11px}
+.tip{position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);box-shadow:0 4px 16px rgb(0 0 0 / .12);border-radius:8px;padding:8px 10px;font-size:12px;line-height:1.5;min-width:130px;z-index:5;white-space:nowrap}
+.tip b{display:block;margin-bottom:2px}
+.tip .r{display:flex;justify-content:space-between;gap:14px;font-variant-numeric:tabular-nums}
+.tip i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums;min-width:560px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-weight:500;color:var(--ink-3);font-size:12px}
+thead tr.grp th{color:var(--ink-2);border-bottom:none;padding-bottom:0}
+td.d{font-family:var(--f-mono);font-size:12px}
+td.d.up{color:var(--up)} td.d.down{color:var(--down)}
+.sec{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sec h2{margin:0;font-size:18px;font-weight:700}
+.sec span{font-size:12px;color:var(--ink-3)}
+.lvl{display:inline-block;font-size:12px;padding:0 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+td.t{text-align:left;white-space:normal;min-width:220px;max-width:360px}
+.foot{font-size:12px;color:var(--ink-3);display:grid;gap:4px}
+.foot h3{font-size:13px;color:var(--ink-2);margin:0 0 2px}
+.foot ul{margin:0;padding-left:18px;display:grid;gap:2px}
+.hit{fill:transparent;cursor:crosshair}
+.hit:hover + .hl, .hl.on{opacity:1}
+@media (max-width:820px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.notes,.grid2{grid-template-columns:1fr}}
+@media (max-width:420px){.kpi .val{font-size:30px}}
+</style>
 
-<div class="kpis"><div class="kpi"><div class="lab">激活</div><div class="val">209</div>
-<div class="row"><span class="chip down">▼ -13%</span><span>上周 239</span></div></div><div class="kpi"><div class="lab">付费用户</div><div class="val">18</div>
-<div class="row"><span class="chip up">▲ +80%</span><span>上周 10</span></div></div><div class="kpi"><div class="lab">GMV(元)</div><div class="val">¥1,670</div>
-<div class="row"><span class="chip up">▲ +388%</span><span>上周 ¥342</span></div></div><div class="kpi"><div class="lab">ARPPU(元)</div><div class="val">¥93</div>
-<div class="row"><span class="chip up">▲ +171%</span><span>上周 ¥34</span></div></div></div>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Hibay 增长周报</h1>
+      <div class="meta">统计周 <b>10/05–10/11</b>（周一至周日）· 对比上周 09/28–10/04 · 近 8 周趋势</div>
+    </div>
+    <div class="meta">神策 mojohi · HiBay Growth Experiments 内容回收总表 · 数据截至 10/12</div>
+  </header>
 
-<div class="sec"><h2>内容营销</h2><div class="cstats"><div class="cstat"><div class="lab">发布条数</div><div class="val">23</div>
-<div class="row"><span class="ch down">-48%</span><span>TikTok 12 · Lemon8 10 · youtube 1</span></div></div><div class="cstat"><div class="lab">爆文</div><div class="val">1</div>
-<div class="row"><span>上周 4</span></div></div><div class="cstat"><div class="lab">累计阅读/播放</div><div class="val">32,964</div>
-<div class="row"><span class="ch down">-72%</span><span>上周 117,215</span></div></div><div class="cstat"><div class="lab">阅读换 1 新增</div><div class="val">158</div>
-<div class="row"><span>Q4 目标 275</span></div></div></div></div>
+  <div class="sec"><h2>业务结果</h2><span>激活、付费与收入</span></div>
+  <section class="kpis" id="kpis"></section>
 
-<div class="cols">
-<div class="sec"><h2>激活 × 国家</h2><svg viewBox="0 0 380 156" width="100%"><text x="70" y="14" font-size="11" text-anchor="end" fill="var(--ink-2)">泰国</text><rect x="76" y="2" width="300" height="16" rx="3" fill="#2f6fe4"/><text x="382" y="14" font-size="11" fill="var(--ink-2)">82</text><text x="70" y="40" font-size="11" text-anchor="end" fill="var(--ink-2)">日本</text><rect x="76" y="28" width="153" height="16" rx="3" fill="#2f6fe4"/><text x="235" y="40" font-size="11" fill="var(--ink-2)">42</text><text x="70" y="66" font-size="11" text-anchor="end" fill="var(--ink-2)">中国</text><rect x="76" y="54" width="36" height="16" rx="3" fill="#2f6fe4"/><text x="118" y="66" font-size="11" fill="var(--ink-2)">10</text><text x="70" y="92" font-size="11" text-anchor="end" fill="var(--ink-2)">印度尼西亚</text><rect x="76" y="80" width="29" height="16" rx="3" fill="#2f6fe4"/><text x="111" y="92" font-size="11" fill="var(--ink-2)">8</text><text x="70" y="118" font-size="11" text-anchor="end" fill="var(--ink-2)">美国</text><rect x="76" y="106" width="25" height="16" rx="3" fill="#2f6fe4"/><text x="107" y="118" font-size="11" fill="var(--ink-2)">7</text><text x="70" y="144" font-size="11" text-anchor="end" fill="var(--ink-2)">蒙古</text><rect x="76" y="132" width="21" height="16" rx="3" fill="#2f6fe4"/><text x="103" y="144" font-size="11" fill="var(--ink-2)">6</text></svg></div>
-<div class="sec"><h2>付费 × 国家</h2><table><thead><tr><th>国家</th><th>付费用户</th><th>收入(元)</th></tr></thead><tbody><tr><td>未识别</td><td>2 人</td><td>¥980</td></tr><tr><td>泰国</td><td>8 人</td><td>¥304</td></tr><tr><td>美国</td><td>2 人</td><td>¥196</td></tr><tr><td>江苏</td><td>2 人</td><td>¥76</td></tr><tr><td>日本</td><td>2 人</td><td>¥38</td></tr><tr><td>非洲地区</td><td>1 人</td><td>¥38</td></tr><tr><td>湖北</td><td>1 人</td><td>¥38</td></tr><tr><td>澳大利亚</td><td>0 人</td><td>¥0</td></tr></tbody></table></div>
+  <section class="notes">
+    <div class="note sum">
+      <h2>本周结论</h2>
+      <p>激活新增 249，环比 +15.8%，增量几乎都来自泰国（96，8 周最高）。付费用户 12 人，是 8/31 以来最高，其中 8 人在泰国，但以泰铢月费为主，GMV ¥802 反而环比 −20.7%，ARPPU 从 ¥145 降到 ¥67。自述来源里抖音/TikTok 72 人，环比 +19，追平 8/10 那周的高点。</p>
+    </div>
+    <div class="note track">
+      <h2>持续跟踪：日本激活连续两周下滑</h2>
+      <p>日本激活 70 → 53 → 46，占全部激活的 18.5%，8/24 那周是 30.3%。本周日本只有 1 笔付费（JPY 终身卡）。再跌一周就回到 8 月中旬之前的水平，需要对一下同期日本号的发布量和播放。</p>
+    </div>
+  </section>
+
+  <section class="grid2">
+    <div class="panel wide">
+      <h3>激活新增 × 国家（按周）</h3>
+      <div class="sub">事件 Moses_installfirsttime，独立用户；国家取 IP</div>
+      <div class="legend" id="lg-act"></div>
+      <div class="chart" id="c-act"></div>
+    </div>
+    <div class="panel">
+      <h3>付费用户（按周）</h3>
+      <div class="sub">已剔除后端批量补推，同人同日只算一次</div>
+      <div class="legend" id="lg-pu"></div>
+      <div class="chart" id="c-pu"></div>
+    </div>
+    <div class="panel">
+      <h3>GMV（元，按周）</h3>
+      <div class="sub">price_yuan + 终身卡原币折算</div>
+      <div class="legend" id="lg-gmv"></div>
+      <div class="chart" id="c-gmv"></div>
+    </div>
+    <div class="panel">
+      <h3>每日激活新增</h3>
+      <div class="sub">近 8 周，虚线为周分隔</div>
+      <div class="chart" id="c-dact"></div>
+    </div>
+    <div class="panel">
+      <h3>每日付费用户</h3>
+      <div class="sub">近 8 周，口径同上</div>
+      <div class="chart" id="c-dpu"></div>
+    </div>
+    <div class="panel wide">
+      <h3>国家明细</h3>
+      <div class="sub">付费国家取 bayuser_country，中国各省合并为「中国」</div>
+      <div class="tbl"><table id="tbl"></table></div>
+    </div>
+    <div class="panel wide">
+      <h3>自述来源（新版引导「你从哪听说我们」）</h3>
+      <div class="sub">Moses_OnboardingStepSelect，step_name = source，独立用户；约 75% 的激活用户会作答</div>
+      <div class="legend" id="lg-src"></div>
+      <div class="chart" id="c-src"></div>
+    </div>
+  </section>
+
+
+  <div class="sec" id="content"><h2>内容营销</h2><span>按发布日期归周；虚线为 Q4 目标折算的周均线</span></div>
+  <section class="kpis" id="kpis-c"></section>
+
+  <section class="notes">
+    <div class="note sum">
+      <h2>本周结论</h2>
+      <p>本周发布 89 条，环比 −15%，全部集中在 9/21–9/24，9/25–9/27 表内没有发布记录。日本发帖 43 条，占比升到 48.3%，接近 Q4 的 50% 要求。爆文 4 条，TikTok 和 Lemon8 各 2 条，TikTok 第一次和 Lemon8 持平；本周内容大多只到 72 小时快照，爆文数还会变。当周发布内容累计阅读 23.1 万，按本周激活折算约 927 次阅读换 1 个新增，离 Q4 的 275 差得远。</p>
+    </div>
+    <div class="note track">
+      <h2>持续跟踪：发布量离 Q4 周均还差一截</h2>
+      <p>Q4 保底 1,800 条折算每周约 138 条，最近两周是 105 和 89。爆文 110 条折算每周约 8.5 条，近 8 周只有 8/10、8/17 两周（9 条、14 条）达到过，8/24 之后一直在 1–7 条。</p>
+    </div>
+  </section>
+
+  <section class="grid2">
+    <div class="panel wide">
+      <h3>发布条数 × 国家（按周）</h3>
+      <div class="sub">内容回收总表，按发布日期；国家取所属实验，缺失时按账号归属</div>
+      <div class="legend" id="lg-posts"></div>
+      <div class="chart" id="c-posts"></div>
+    </div>
+    <div class="panel">
+      <h3>爆文数 × 平台（按周）</h3>
+      <div class="sub">小爆及以上；7 天内达标才算，最近一周未成熟</div>
+      <div class="legend" id="lg-hits"></div>
+      <div class="chart" id="c-hits"></div>
+    </div>
+    <div class="panel">
+      <h3>日本发帖占比</h3>
+      <div class="sub">日本条数 ÷ 全部条数；虚线为 Q4 要求 50%</div>
+      <div class="chart" id="c-jp"></div>
+    </div>
+    <div class="panel">
+      <h3>当周发布内容累计阅读（按国家）</h3>
+      <div class="sub">阅读/播放取最新快照，越新的一周越偏低</div>
+      <div class="legend" id="lg-views"></div>
+      <div class="chart" id="c-views"></div>
+    </div>
+    <div class="panel">
+      <h3>阅读换 1 个新增</h3>
+      <div class="sub">当周发布内容累计阅读 ÷ 当周激活新增；虚线为 Q4 目标 275</div>
+      <div class="chart" id="c-ratio"></div>
+    </div>
+    <div class="panel wide">
+      <h3>近两周爆文</h3>
+      <div class="sub">09/14–09/27 发布、已判为小爆及以上的内容</div>
+      <div class="tbl"><table id="tbl-hits"></table></div>
+    </div>
+  </section>
+
+  <section class="foot">
+    <h3>口径说明</h3>
+    <ul>
+      <li>付费事件为 Moses_vippaid_iosAndroid（安卓与 iOS 内购，不含官网和兑换码）。</li>
+      <li>已剔除两次后端批量补推：9/20 17–18 时 145 单、9/21 9 时 70 单，这批用户没有引导和启动记录，不是真实新购。</li>
+      <li>同一用户同一天的重复上报只算一次；周付费用户为每日去重人数加总，同一人在一周内不同日付费会重复计入。</li>
+      <li>终身卡的 price_yuan 记为 0，按原币折人民币补回（JPY×0.048、THB×0.22、USD×7.1、SAR×1.9），8 周共 16 单。</li>
+      <li>国家按 IP 或注册地判断，开 VPN 的用户会被记到别的国家；美国付费此前核过以东八区华语用户为主。</li>
+      <li>内容数据来自 HiBay Growth Experiments「内容回收总表」，按发布日期周一至周日归周；爆文按营销群标准（Lemon8 小爆 ≥3,000 阅读且 ≥150 互动，TikTok 小爆 ≥5,000 播放且 ≥150 互动，互动不含分享）。爆文率分母为已做判定的条数。</li>
+      <li>Q4 周均线：发布 1,800 条 ÷ 13 周 ≈ 138 条，爆文 110 条 ÷ 13 周 ≈ 8.5 条。</li>
+    </ul>
+  </section>
 </div>
 
-<div class="cols">
-<div class="note sum"><h2>本周结论</h2><p>激活 下降 -13%，付费 上升 +80%，GMV 上升 +388%。ARPPU ¥93（升），主要来自未识别（2 人 / ¥980）。内容发布 23 条（-48%）、爆文 1 条。</p></div>
-<div class="note track"><h2>持续跟踪</h2><p>① 未识别国家大额订单核对真实来源（避免渠道归因误判）；② 内容产能恢复节奏——目标回到爆文 4+ 条/周、发布 40+ 条/周。</p></div>
-</div>
-</div></body></html>
+<script>
+const D = {"weeks": ["08/17", "08/24", "08/31", "09/07", "09/14", "09/21", "09/28", "10/05"], "days": ["08/17", "08/18", "08/19", "08/20", "08/21", "08/22", "08/23", "08/24", "08/25", "08/26", "08/27", "08/28", "08/29", "08/30", "08/31", "09/01", "09/02", "09/03", "09/04", "09/05", "09/06", "09/07", "09/08", "09/09", "09/10", "09/11", "09/12", "09/13", "09/14", "09/15", "09/16", "09/17", "09/18", "09/19", "09/20", "09/21", "09/22", "09/23", "09/24", "09/25", "09/26", "09/27", "09/28", "09/29", "09/30", "10/01", "10/02", "10/03", "10/04", "10/05", "10/06", "10/07", "10/08", "10/09", "10/10", "10/11"], "countries": ["泰国", "日本", "中国", "美国", "印度尼西亚", "其他"], "act": {"泰国": [84, 52, 49, 76, 78, 97, 74, 82], "日本": [58, 82, 57, 70, 53, 46, 44, 37], "中国": [20, 22, 35, 25, 21, 17, 6, 14], "美国": [8, 20, 18, 7, 8, 11, 15, 9], "印度尼西亚": [15, 11, 17, 6, 5, 10, 7, 6], "其他": [90, 78, 76, 48, 54, 70, 67, 57]}, "actTotal": [275, 265, 252, 232, 219, 251, 213, 205], "actDay": [31, 49, 36, 33, 36, 48, 42, 35, 29, 40, 37, 42, 39, 43, 57, 41, 34, 27, 26, 30, 37, 38, 36, 30, 19, 39, 35, 35, 37, 33, 35, 25, 32, 31, 26, 50, 27, 27, 33, 50, 29, 35, 36, 33, 34, 22, 30, 26, 32, 25, 35, 29, 32, 24, 32, 28], "payUsers": {"泰国": [8, 2, 1, 4, 24, 9, 7, 10], "日本": [2, 2, 0, 0, 1, 1, 2, 1], "中国": [0, 0, 0, 0, 0, 0, 0, 0], "美国": [3, 5, 2, 0, 2, 0, 0, 2], "印度尼西亚": [0, 0, 0, 0, 2, 1, 0, 0], "其他": [2, 3, 3, 6, 21, 9, 5, 7]}, "payGmv": {"泰国": [306.0, 136.0, 38.0, 152.0, 3212.0, 418.0, 228.0, 640.0], "日本": [298.0, 0.0, 0.0, 0.0, 38.0, 0.0, 38.0, 38.0], "中国": [0, 0, 0, 0, 0, 0, 0, 0], "美国": [912.0, 1248.0, 542.0, 0.0, 74.0, 0.0, 0.0, 196.0], "印度尼西亚": [0.0, 0.0, 0.0, 0.0, 76.0, 114.0, 0.0, 0.0], "其他": [136.0, 336.0, 76.0, 250.0, 3340.0, 2846.0, 190.0, 1430.0]}, "payDayUsers": [3, 0, 2, 2, 5, 1, 2, 1, 2, 1, 2, 1, 2, 3, 2, 1, 2, 0, 1, 0, 0, 3, 2, 2, 0, 1, 1, 1, 2, 1, 1, 2, 0, 1, 43, 11, 2, 3, 2, 0, 0, 2, 4, 1, 2, 1, 3, 1, 2, 0, 1, 4, 7, 6, 1, 1], "payDayGmv": [174.0, 0.0, 456.0, 58.0, 590.0, 38.0, 336.0, 456.0, 456.0, 298.0, 336.0, 0.0, 38.0, 136.0, 542.0, 38.0, 38.0, 0.0, 38.0, 0.0, 0.0, 114.0, 76.0, 76.0, 0.0, 38.0, 0.0, 98.0, 38.0, 38.0, 38.0, 38.0, 0.0, 38.0, 6550.0, 3036.0, 76.0, 114.0, 76.0, 0.0, 0.0, 76.0, 114.0, 38.0, 76.0, 38.0, 114.0, 38.0, 38.0, 0.0, 38.0, 152.0, 1290.0, 488.0, 298.0, 38.0], "src": {"2026-08-24": {"Lemon8": 79, "抖音/TikTok": 38, "Instagram": 16, "Facebook": 8, "YouTube": 5, "应用商店": 11, "Google 搜索": 6, "Threads": 1, "其他": 5, "ChatGPT 等 AI 助手": 2, "小红书": 5}, "2026-08-31": {"Lemon8": 56, "抖音/TikTok": 37, "Instagram": 13, "Facebook": 5, "YouTube": 5, "应用商店": 7, "Google 搜索": 4, "Threads": 0, "其他": 1, "ChatGPT 等 AI 助手": 5, "小红书": 3}, "2026-09-07": {"Lemon8": 68, "抖音/TikTok": 37, "Instagram": 17, "Facebook": 7, "YouTube": 8, "应用商店": 7, "Google 搜索": 4, "Threads": 2, "其他": 3, "ChatGPT 等 AI 助手": 5, "小红书": 3}, "2026-09-14": {"Lemon8": 46, "抖音/TikTok": 48, "Instagram": 12, "Facebook": 1, "YouTube": 12, "应用商店": 7, "Google 搜索": 1, "Threads": 2, "其他": 3, "ChatGPT 等 AI 助手": 3, "小红书": 2}, "2026-09-21": {"Lemon8": 49, "抖音/TikTok": 64, "Instagram": 18, "Facebook": 6, "YouTube": 4, "应用商店": 12, "Google 搜索": 3, "Threads": 1, "其他": 6, "ChatGPT 等 AI 助手": 5, "小红书": 0}, "2026-09-28": {"Lemon8": 33, "抖音/TikTok": 60, "Instagram": 20, "Facebook": 5, "YouTube": 4, "应用商店": 6, "Google 搜索": 4, "Threads": 1, "其他": 0, "ChatGPT 等 AI 助手": 1, "小红书": 1}, "2026-10-05": {"Lemon8": 22, "抖音/TikTok": 68, "Instagram": 16, "Facebook": 4, "YouTube": 10, "应用商店": 6, "Google 搜索": 7, "Threads": 1, "其他": 0, "ChatGPT 等 AI 助手": 1, "小红书": 2}}, "content": {"countries": ["泰国", "日本", "美国", "印尼", "其他"], "posts": {"泰国": [37, 25, 25, 33, 54, 34, 16, 23], "日本": [4, 3, 9, 13, 34, 43, 22, 34], "美国": [7, 10, 15, 11, 15, 12, 6, 9], "印尼": [1, 4, 5, 3, 2, 0, 0, 0], "其他": [20, 6, 2, 1, 0, 0, 0, 0]}, "postsTotal": [69, 48, 56, 61, 105, 89, 44, 66], "hitsTotal": [14, 1, 2, 6, 7, 5, 4, 3], "judged": [68, 45, 56, 60, 105, 89, 44, 66], "platHits": {"Lemon8": [13, 1, 2, 5, 6, 3, 4, 2], "TikTok": [1, 0, 0, 1, 1, 2, 0, 1], "YouTube": [0, 0, 0, 0, 0, 0, 0, 0]}, "viewsC": {"泰国": [143163.0, 16692.0, 18102.0, 88475.0, 165449.0, 91086.0, 50401.0, 13861.0], "日本": [121412.0, 19587.0, 88139.0, 40567.0, 161904.0, 173070.0, 60726.0, 96366.0], "美国": [33269.0, 4641.0, 6106.0, 6307.0, 10565.0, 10406.0, 6088.0, 5672.0], "印尼": [9180.0, 2280.0, 1832.0, 1252.0, 2118.0, 0.0, 0.0, 0.0], "其他": [24335.0, 2061.0, 2942.0, 8261.0, 0.0, 0.0, 0.0, 0.0]}, "views": [331359, 45261, 117121, 144862, 340036, 274562, 117215, 115899], "hitList": [{"date": "2026-09-29", "owner": {"id": "ou_b9492ec0c2d1922b6c665d543409d7b8", "name": "盛浩林"}, "p": "Lemon8", "lvl": "中爆", "views": 30023, "likes": 234, "col": 249, "exp": "日本泛人群 × Lemon8 × 各类学习方法", "title": ""}, {"date": "2026-09-28", "owner": {"id": "ou_048fb1a3e152779e92ee4ab0c881972a", "name": "舒安祺"}, "p": "Lemon8", "lvl": "中爆", "views": 15727, "likes": 343, "col": 137, "exp": "泰国泛人群 × Lemon8 × 自我提升向日常 Plog", "title": "How to เริ่มดูแลรูปร่าง 4 วิธีง่าย ๆ ที่ทำได้ทุกวัน 💪"}, {"date": "2026-09-30", "owner": {"id": "ou_048fb1a3e152779e92ee4ab0c881972a", "name": "舒安祺"}, "p": "Lemon8", "lvl": "中爆", "views": 13240, "likes": 312, "col": 280, "exp": "泰国泛英语 × Lemon8 × 学习方法/学习日常", "title": ""}, {"date": "2026-09-30", "owner": {"id": "ou_048fb1a3e152779e92ee4ab0c881972a", "name": "舒安祺"}, "p": "Lemon8", "lvl": "小爆", "views": 9924, "likes": 205, "col": 87, "exp": "泰国泛人群 × Lemon8 × 自我提升向日常 Plog", "title": ""}, {"date": "2026-10-08", "owner": {"id": "ou_b9492ec0c2d1922b6c665d543409d7b8", "name": "盛浩林"}, "p": "Lemon8", "lvl": "小爆", "views": 13596, "likes": 83, "col": 68, "exp": "日本泛人群 × Lemon8 × 各类学习方法", "title": ""}, {"date": "2026-10-10", "owner": {"id": "ou_048fb1a3e152779e92ee4ab0c881972a", "name": "舒安祺"}, "p": "Lemon8", "lvl": "小爆", "views": 4054, "likes": 136, "col": 88, "exp": "泰国泛英语 × Lemon8 × 学习方法/学习日常", "title": ""}, {"date": "2026-10-10", "owner": {"id": "ou_ca37492cf6eaf44f0494cbb9a2406679", "name": "于越"}, "p": "TikTok", "lvl": "小爆", "views": 14200, "likes": 187, "col": 71, "exp": "日本托业 × TikTok × 学习方法", "title": ""}]}};
+const $ = s => document.querySelector(s);
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const NAMES = {"印度尼西亚":"印尼"};
+const CC = ["--s1","--s2","--s3","--s4","--s5","--s6"];
+const nm = c => NAMES[c] || c;
+const fmt = n => Math.round(n).toLocaleString("en-US");
+const sum = a => a.reduce((x,y)=>x+y,0);
+const wk = i => D.weeks[i] + "–" + (() => { const [m,d] = D.weeks[i].split("/").map(Number); const t = new Date(2026,m-1,d+6); return String(t.getMonth()+1).padStart(2,"0")+"/"+String(t.getDate()).padStart(2,"0"); })();
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+function niceMax(v){ const p = Math.pow(10, Math.floor(Math.log10(v))); for (const m of [1,1.2,1.5,2,2.5,3,4,5,6,8,10]) if (m*p >= v) return m*p; return v; }
+function ticks(max){ return [0, max/2, max]; }
+
+const series = key => D.countries.map(c => D[key][c]);
+const weekly = key => D.weeks.map((_,i) => sum(D.countries.map(c => D[key][c][i])));
+const actT = D.actTotal, puT = weekly("payUsers"), gmT = weekly("payGmv");
+const last = D.weeks.length - 1;
+
+// KPI tiles
+function spark(svg, vals){
+  const w = 200, h = 34, max = Math.max(...vals), min = 0;
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`); svg.setAttribute("preserveAspectRatio","none");
+  const x = i => 3 + i*(w-6)/(vals.length-1), y = v => h-3 - (v-min)/(max-min||1)*(h-8);
+  const pts = vals.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
+  el("polygon",{points:`${x(0)},${h} ${pts} ${x(vals.length-1)},${h}`,fill:"var(--accent-soft)"},svg);
+  el("polyline",{points:pts,fill:"none",stroke:"var(--accent)","stroke-width":1.6,"vector-effect":"non-scaling-stroke","stroke-linejoin":"round"},svg);
+  el("circle",{cx:x(vals.length-1),cy:y(vals.at(-1)),r:3,fill:"var(--accent)",stroke:"var(--panel)","stroke-width":1.5},svg);
+}
+const arppu = D.weeks.map((_,i) => puT[i] ? gmT[i]/puT[i] : 0);
+const K = [
+  {lab:"激活新增", v:actT, f:fmt, unit:"人", pct:true},
+  {lab:"付费用户", v:puT, f:fmt, unit:"人", pct:false},
+  {lab:"GMV", v:gmT, f:v=>"¥"+fmt(v), unit:"", pct:true},
+  {lab:"ARPPU", v:arppu, f:v=>"¥"+fmt(v), unit:"", pct:true},
+];
+for (const k of K){
+  const cur = k.v[last], prev = k.v[last-1];
+  const d = k.pct ? (cur-prev)/prev*100 : cur-prev;
+  const cls = Math.abs(d) < (k.pct?0.5:0.5) ? "flat" : d > 0 ? "up" : "down";
+  const txt = (d>0?"↑ ":d<0?"↓ ":"") + (k.pct ? Math.abs(d).toFixed(1)+"%" : Math.abs(d)+" 人");
+  const div = document.createElement("div"); div.className = "kpi";
+  div.innerHTML = `<div class="lab">${k.lab}</div><div class="val">${k.f(cur)}${k.unit?`<small>${k.unit}</small>`:""}</div>
+    <div class="row"><span class="chip ${cls}">${txt}</span><span>上周 ${k.f(prev)}</span></div>`;
+  const s = el("svg",{"aria-label":k.lab+" 近 8 周走势",role:"img"}); div.appendChild(s); spark(s, k.v);
+  $("#kpis").appendChild(div);
+}
+
+// legend
+function legend(id, items){ $(id).innerHTML = items.map(([n,c]) => `<span><i style="background:var(${c})"></i>${n}</span>`).join(""); }
+
+// tooltip
+function tipFor(box){ const t = document.createElement("div"); t.className = "tip"; t.hidden = true; box.appendChild(t); return t; }
+function place(t, box, px, py){
+  t.hidden = false; const bw = box.clientWidth, tw = t.offsetWidth;
+  let left = px + 12; if (left + tw > bw) left = px - tw - 12; if (left < 0) left = 0;
+  t.style.left = left + "px"; t.style.top = Math.max(0, py - 10) + "px";
+}
+
+// stacked bars: src = {name: [8 weekly values]}, names = draw order (bottom→top), colors = token per name
+function stacked(id, src, names, colors, opts={}){
+  const box = $(id), W = 640, H = opts.h || 240, m = {l:40,r:8,t:18,b:24};
+  const svg = el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"},box); const tip = tipFor(box);
+  const n = D.weeks.length, tot = D.weeks.map((_,i) => sum(names.map(k => src[k][i])));
+  const max = niceMax(Math.max(...tot, opts.ref ? opts.ref.v*1.08 : 0));
+  const bw = (W-m.l-m.r)/n, barW = Math.min(46, bw*0.62);
+  const y = v => H-m.b - v/max*(H-m.t-m.b);
+  const f = v => opts.money ? "¥"+fmt(v) : opts.k ? (v>=10000 ? (v/10000).toFixed(1)+"万" : fmt(v)) : fmt(v);
+  const tf = v => opts.money ? (v>=1000 ? (v/1000)+"k" : v) : opts.k ? (v>=10000 ? (v/10000)+"万" : v) : v;
+  for (const tv of ticks(max)){ el("line",{x1:m.l,x2:W-m.r,y1:y(tv),y2:y(tv),stroke:"var(--grid)"},svg); const tx = el("text",{x:m.l-6,y:y(tv)+4,"text-anchor":"end"},svg); tx.textContent = tf(tv); }
+  D.weeks.forEach((w,i) => {
+    const cx = m.l + bw*i + bw/2; let acc = 0;
+    const segs = names.map((k,ci) => ({k, ci, v:src[k][i]})).filter(s => s.v > 0);
+    segs.forEach((s,si) => {
+      const y0 = y(acc), y1 = y(acc + s.v); acc += s.v;
+      const top = si === segs.length-1, hgt = Math.max(0, y0-y1-(top?0:2));
+      const r = top ? Math.min(4, hgt) : 0, x0 = cx-barW/2;
+      const d = top ? `M${x0},${y0} V${y1+r} Q${x0},${y1} ${x0+r},${y1} H${x0+barW-r} Q${x0+barW},${y1} ${x0+barW},${y1+r} V${y0} Z` : `M${x0},${y0} V${y0-hgt} H${x0+barW} V${y0} Z`;
+      el("path",{d, fill:`var(${colors[s.ci]})`, opacity: i===n-1 ? 1 : .82},svg);
+    });
+    if (i===n-1 || i===0 || tot[i]===Math.max(...tot)){ const lt = el("text",{x:cx,y:y(tot[i])-5,"text-anchor":"middle",class:"vlab"},svg); lt.textContent = f(tot[i]); }
+    const xl = el("text",{x:cx,y:H-6,"text-anchor":"middle"},svg); xl.textContent = w;
+  });
+  if (opts.ref){
+    el("line",{x1:m.l,x2:W-m.r,y1:y(opts.ref.v),y2:y(opts.ref.v),stroke:"var(--warn)","stroke-width":1.5,"stroke-dasharray":"5 4"},svg);
+    const rt = el("text",{x:W-m.r,y:y(opts.ref.v)-5,"text-anchor":"end",style:"fill:var(--warn)"},svg); rt.textContent = opts.ref.label;
+  }
+  D.weeks.forEach((w,i) => {
+    const hit = el("rect",{x:m.l+bw*i,y:m.t,width:bw,height:H-m.t-m.b,class:"hit"},svg);
+    hit.addEventListener("mousemove", ev => {
+      const rows = names.map((k,ci)=>[k,ci,src[k][i]]).filter(r=>r[2]>0).reverse()
+        .map(([k,ci,v]) => `<div class="r"><span><i style="background:var(${colors[ci]})"></i>${nm(k)}</span><span>${f(v)}</span></div>`).join("");
+      tip.innerHTML = `<b>${wk(i)}</b>${rows}<div class="r" style="border-top:1px solid var(--line);margin-top:3px;padding-top:3px"><span>合计</span><span>${f(tot[i])}</span></div>${opts.extra ? opts.extra(i) : ""}`;
+      const r = box.getBoundingClientRect(); place(tip, box, ev.clientX - r.left, ev.clientY - r.top);
+    });
+    hit.addEventListener("mouseleave", () => tip.hidden = true);
+  });
+}
+const lg = D.countries.map((c,i)=>[nm(c),CC[i]]);
+legend("#lg-act", lg); legend("#lg-pu", lg); legend("#lg-gmv", lg);
+stacked("#c-act", D.act, D.countries, CC, {h:230});
+stacked("#c-pu", D.payUsers, D.countries, CC, {h:220});
+stacked("#c-gmv", D.payGmv, D.countries, CC, {h:220, money:true});
+
+// daily line
+function line(id, vals, label){
+  const box = $(id), W = 640, H = 200, m = {l:32,r:10,t:14,b:24};
+  const svg = el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"},box); const tip = tipFor(box);
+  const max = niceMax(Math.max(...vals)), n = vals.length;
+  const x = i => m.l + i*(W-m.l-m.r)/(n-1), y = v => H-m.b - v/max*(H-m.t-m.b);
+  for (const tv of ticks(max)){ el("line",{x1:m.l,x2:W-m.r,y1:y(tv),y2:y(tv),stroke:"var(--grid)"},svg); const tx = el("text",{x:m.l-6,y:y(tv)+4,"text-anchor":"end"},svg); tx.textContent = tv; }
+  for (let i=7;i<n;i+=7){ el("line",{x1:x(i)-(x(1)-x(0))/2,x2:x(i)-(x(1)-x(0))/2,y1:m.t,y2:H-m.b,stroke:"var(--line)","stroke-dasharray":"3 3"},svg); }
+  D.weeks.forEach((w,wi)=>{ const t = el("text",{x:x(wi*7+3),y:H-6,"text-anchor":"middle"},svg); t.textContent = w; });
+  const pts = vals.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
+  el("polygon",{points:`${x(0)},${y(0)} ${pts} ${x(n-1)},${y(0)}`,fill:"var(--accent-soft)"},svg);
+  el("polyline",{points:pts,fill:"none",stroke:"var(--accent)","stroke-width":2,"stroke-linejoin":"round"},svg);
+  el("circle",{cx:x(n-1),cy:y(vals[n-1]),r:4,fill:"var(--accent)",stroke:"var(--panel)","stroke-width":2},svg);
+  const cross = el("line",{y1:m.t,y2:H-m.b,stroke:"var(--ink-3)","stroke-width":1,opacity:0},svg);
+  const dot = el("circle",{r:4,fill:"var(--accent)",stroke:"var(--panel)","stroke-width":2,opacity:0},svg);
+  const hit = el("rect",{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b,class:"hit"},svg);
+  hit.addEventListener("mousemove", ev => {
+    const r = svg.getBoundingClientRect(), sx = (ev.clientX - r.left) * W / r.width;
+    const i = Math.max(0, Math.min(n-1, Math.round((sx - m.l) / ((W-m.l-m.r)/(n-1)))));
+    cross.setAttribute("x1",x(i)); cross.setAttribute("x2",x(i)); cross.setAttribute("opacity",.5);
+    dot.setAttribute("cx",x(i)); dot.setAttribute("cy",y(vals[i])); dot.setAttribute("opacity",1);
+    const wd = "日一二三四五六"[new Date(2026, +D.days[i].slice(0,2)-1, +D.days[i].slice(3)).getDay()];
+    tip.innerHTML = `<b>${D.days[i]} 周${wd}</b><div class="r"><span>${label}</span><span>${vals[i]}</span></div>`;
+    const br = box.getBoundingClientRect(); place(tip, box, x(i)*r.width/W, ev.clientY - br.top);
+  });
+  hit.addEventListener("mouseleave", () => { tip.hidden = true; cross.setAttribute("opacity",0); dot.setAttribute("opacity",0); });
+}
+line("#c-dact", D.actDay, "激活新增");
+line("#c-dpu", D.payDayUsers, "付费用户");
+
+// table
+(function(){
+  const rows = D.countries.map(c => ({c, a:D.act[c][last], ap:D.act[c][last-1], p:D.payUsers[c][last], pp:D.payUsers[c][last-1], g:D.payGmv[c][last], gp:D.payGmv[c][last-1]}));
+  rows.push({c:"合计", a:actT[last], ap:actT[last-1], p:puT[last], pp:puT[last-1], g:gmT[last], gp:gmT[last-1], tot:true});
+  const dcell = (a,b,pct) => { if (!b && !a) return `<td class="d">–</td>`; const d = pct ? (b ? (a-b)/b*100 : null) : a-b; if (d === null) return `<td class="d up">新</td>`; const cls = d>0?"up":d<0?"down":""; return `<td class="d ${cls}">${d>0?"+":""}${pct?d.toFixed(0)+"%":d}</td>`; };
+  $("#tbl").innerHTML = `<thead><tr class="grp"><th></th><th colspan="3">激活新增</th><th colspan="3">付费用户</th><th colspan="3">GMV（元）</th></tr>
+    <tr><th>国家</th><th>本周</th><th>上周</th><th>环比</th><th>本周</th><th>上周</th><th>变化</th><th>本周</th><th>上周</th><th>环比</th></tr></thead><tbody>` +
+    rows.map(r => `<tr${r.tot?' style="font-weight:700"':""}><td>${r.tot?"合计":`<i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:var(${CC[D.countries.indexOf(r.c)]})"></i>`+nm(r.c)}</td>
+      <td>${r.a}</td><td>${r.ap}</td>${dcell(r.a,r.ap,true)}<td>${r.p}</td><td>${r.pp}</td>${dcell(r.p,r.pp,false)}<td>${fmt(r.g)}</td><td>${fmt(r.gp)}</td>${dcell(r.g,r.gp,true)}</tr>`).join("") + "</tbody>";
+})();
+
+// sources: this week vs last week, horizontal grouped bars
+(function(){
+  const ks = Object.keys(D.src).sort(), cur = D.src[ks.at(-1)], prev = D.src[ks.at(-2)];
+  const names = [...new Set([...Object.keys(cur), ...Object.keys(prev)])].sort((a,b)=>(cur[b]||0)-(cur[a]||0));
+  legend("#lg-src", [["本周 10/05–10/11","--s1"],["上周 09/28–10/04","--s6"]]);
+  const box = $("#c-src"), W = 640, rowH = 30, m = {l:132,r:44,t:4,b:4}, H = m.t + m.b + names.length*rowH;
+  const svg = el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"},box); const tip = tipFor(box);
+  const max = niceMax(Math.max(...names.map(n=>Math.max(cur[n]||0, prev[n]||0))));
+  const x = v => m.l + v/max*(W-m.l-m.r);
+  names.forEach((nmv,i) => {
+    const y0 = m.t + i*rowH;
+    const lab = el("text",{x:m.l-8,y:y0+rowH/2+4,"text-anchor":"end",style:"font-family:var(--f-body);font-size:12px;fill:var(--ink-2)"},svg); lab.textContent = nmv;
+    [[cur[nmv]||0,"--s1",5],[prev[nmv]||0,"--s6",16]].forEach(([v,c,dy]) => {
+      const w = Math.max(v ? 2 : 0, x(v)-m.l), r = Math.min(3, w);
+      el("path",{d:`M${m.l},${y0+dy} H${m.l+w-r} Q${m.l+w},${y0+dy} ${m.l+w},${y0+dy+r} V${y0+dy+9-r} Q${m.l+w},${y0+dy+9} ${m.l+w-r},${y0+dy+9} H${m.l} Z`,fill:`var(${c})`},svg);
+    });
+    const vt = el("text",{x:x(Math.max(cur[nmv]||0, prev[nmv]||0))+6,y:y0+14,class:"vlab"},svg); vt.textContent = cur[nmv]||0;
+    const hit = el("rect",{x:0,y:y0,width:W,height:rowH,class:"hit"},svg);
+    hit.addEventListener("mousemove", ev => {
+      const a = cur[nmv]||0, b = prev[nmv]||0;
+      tip.innerHTML = `<b>${nmv}</b><div class="r"><span><i style="background:var(--s1)"></i>本周</span><span>${a}</span></div><div class="r"><span><i style="background:var(--s6)"></i>上周</span><span>${b}</span></div><div class="r"><span>变化</span><span>${a-b>0?"+":""}${a-b}</span></div>`;
+      const r = box.getBoundingClientRect(); place(tip, box, ev.clientX - r.left, ev.clientY - r.top);
+    });
+    hit.addEventListener("mouseleave", () => tip.hidden = true);
+  });
+  el("line",{x1:m.l,x2:m.l,y1:m.t,y2:H-m.b,stroke:"var(--line)"},svg);
+})();
+
+// ---------- 内容营销 ----------
+const C = D.content, CN = C.countries, CCc = ["--s1","--s2","--s3","--s5","--s6"];
+const jpShare = C.postsTotal.map((v,i) => v ? C.posts["日本"][i]/v*100 : 0);
+const ratio = C.views.map((v,i) => actT[i] ? v/actT[i] : 0);
+const hitRate = C.hitsTotal.map((h,i) => C.judged[i] ? h/C.judged[i]*100 : 0);
+function chipHTML(cur, prev, mode, goodDown){
+  let d, txt;
+  if (mode === "pct"){ d = (cur-prev)/prev*100; txt = Math.abs(d).toFixed(1)+"%"; }
+  else if (mode === "pp"){ d = cur-prev; txt = Math.abs(d).toFixed(1)+"pp"; }
+  else { d = cur-prev; txt = Math.abs(d)+" 条"; }
+  const good = goodDown ? d < 0 : d > 0;
+  const cls = Math.abs(d) < 0.05 ? "flat" : good ? "up" : "down";
+  return `<span class="chip ${cls}">${d>0?"↑ ":d<0?"↓ ":""}${txt}</span>`;
+}
+const KC = [
+  {lab:"发布条数", v:C.postsTotal, f:fmt, unit:"条", mode:"pct", target:"Q4 周均 138 条"},
+  {lab:"爆文数", v:C.hitsTotal, f:fmt, unit:"条", mode:"n", target:"Q4 周均 8.5 条", note:()=>`爆文率 ${hitRate[last].toFixed(1)}% · 未满 7 天`},
+  {lab:"日本发帖占比", v:jpShare, f:v=>v.toFixed(1), unit:"%", mode:"pp", target:"Q4 要求 ≥50%"},
+  {lab:"阅读换 1 个新增", v:ratio, f:fmt, unit:"次", mode:"pct", goodDown:true, target:"Q4 目标 <275 次"},
+];
+for (const k of KC){
+  const cur = k.v[last], prev = k.v[last-1];
+  const div = document.createElement("div"); div.className = "kpi";
+  div.innerHTML = `<div class="lab">${k.lab}</div><div class="val">${k.f(cur)}<small>${k.unit}</small></div>
+    <div class="row">${chipHTML(cur, prev, k.mode, k.goodDown)}<span>上周 ${k.f(prev)}${k.unit==="%"?"%":""}</span></div>
+    <div class="row"><span style="color:var(--warn)">${k.target}</span>${k.note?`<span>${k.note()}</span>`:""}</div>`;
+  const s = el("svg",{"aria-label":k.lab+" 近 8 周走势",role:"img"}); div.appendChild(s); spark(s, k.v);
+  $("#kpis-c").appendChild(div);
+}
+legend("#lg-posts", CN.map((c,i)=>[c,CCc[i]]));
+stacked("#c-posts", C.posts, CN, CCc, {h:230, ref:{v:138,label:"Q4 周均 138"}, extra:i=>`<div class="r"><span>日本占比</span><span>${jpShare[i].toFixed(1)}%</span></div>`});
+const PL = ["Lemon8","TikTok","YouTube"], PLc = ["--s3","--s1","--s4"];
+legend("#lg-hits", PL.map((p,i)=>[p,PLc[i]]));
+stacked("#c-hits", C.platHits, PL, PLc, {h:220, ref:{v:8.5,label:"Q4 周均 8.5"}, extra:i=>`<div class="r"><span>爆文率</span><span>${hitRate[i].toFixed(1)}%</span></div><div class="r"><span>发布条数</span><span>${C.postsTotal[i]}</span></div>`});
+legend("#lg-views", CN.map((c,i)=>[c,CCc[i]]));
+stacked("#c-views", C.viewsC, CN, CCc, {h:220, k:true});
+
+function weekLine(id, vals, fmtv, ref, label){
+  const box = $(id), W = 640, H = 220, m = {l:44,r:14,t:18,b:24};
+  const svg = el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img"},box); const tip = tipFor(box);
+  const n = vals.length, max = niceMax(Math.max(...vals, ref.v*1.1));
+  const x = i => m.l + (i+.5)*(W-m.l-m.r)/n, y = v => H-m.b - v/max*(H-m.t-m.b);
+  for (const tv of ticks(max)){ el("line",{x1:m.l,x2:W-m.r,y1:y(tv),y2:y(tv),stroke:"var(--grid)"},svg); const tx = el("text",{x:m.l-6,y:y(tv)+4,"text-anchor":"end"},svg); tx.textContent = fmtv(tv); }
+  el("line",{x1:m.l,x2:W-m.r,y1:y(ref.v),y2:y(ref.v),stroke:"var(--warn)","stroke-width":1.5,"stroke-dasharray":"5 4"},svg);
+  const rt = el("text",{x:W-m.r,y:y(ref.v)-5,"text-anchor":"end",style:"fill:var(--warn)"},svg); rt.textContent = ref.label;
+  const pts = vals.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
+  el("polyline",{points:pts,fill:"none",stroke:"var(--accent)","stroke-width":2,"stroke-linejoin":"round"},svg);
+  vals.forEach((v,i) => {
+    el("circle",{cx:x(i),cy:y(v),r:i===n-1?5:4,fill:"var(--accent)",stroke:"var(--panel)","stroke-width":2},svg);
+    const xl = el("text",{x:x(i),y:H-6,"text-anchor":"middle"},svg); xl.textContent = D.weeks[i];
+    if (i===n-1 || i===0){ const lt = el("text",{x:x(i),y:y(v)-10,"text-anchor":"middle",class:"vlab"},svg); lt.textContent = fmtv(v); }
+    const hit = el("rect",{x:x(i)-(W-m.l-m.r)/n/2,y:m.t,width:(W-m.l-m.r)/n,height:H-m.t-m.b,class:"hit"},svg);
+    hit.addEventListener("mousemove", ev => { tip.innerHTML = `<b>${wk(i)}</b><div class="r"><span>${label}</span><span>${fmtv(v)}</span></div>`; const r = box.getBoundingClientRect(); place(tip, box, ev.clientX - r.left, ev.clientY - r.top); });
+    hit.addEventListener("mouseleave", () => tip.hidden = true);
+  });
+}
+weekLine("#c-jp", jpShare, v=>Math.round(v)+"%", {v:50,label:"Q4 要求 50%"}, "日本占比");
+weekLine("#c-ratio", ratio, v=>fmt(v), {v:275,label:"Q4 目标 275"}, "阅读换 1 个新增");
+
+(function(){
+  const L = {"小爆":1,"中爆":2,"大爆":3};
+  const rows = C.hitList.slice().sort((a,b)=> b.date.localeCompare(a.date) || b.views-a.views);
+  $("#tbl-hits").innerHTML = `<thead><tr><th>发布日</th><th>负责人</th><th>平台</th><th>等级</th><th>阅读/播放</th><th>赞+藏</th><th style="text-align:left">实验</th><th style="text-align:left">标题</th></tr></thead><tbody>` +
+    rows.map(h => `<tr><td>${h.date.slice(5).replace("-","/")}</td><td>${h.owner||"–"}</td><td>${h.p}</td><td><span class="lvl">${h.lvl}</span></td><td>${fmt(h.views)}</td><td>${fmt(h.likes+h.col)}</td><td class="t">${h.exp}</td><td class="t">${h.title.replace(/</g,"&lt;")}</td></tr>`).join("") + "</tbody>";
+})();
+</script>
+
+</body></html>
