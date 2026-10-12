@@ -16,10 +16,10 @@ h1{font-size:21px;margin:0;font-weight:700;color:var(--ink)}
 .sec-t{font-size:15px;font-weight:700;margin-top:4px;display:flex;align-items:center;gap:8px}
 .sec-t::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--blue)}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.kpi{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:13px 14px;display:grid;gap:5px}
+.kpi{border-radius:11px;padding:13px 14px;display:grid;gap:5px}
+.kpi.up{background:#e3f4ea} .kpi.down{background:#fbe9e5} .kpi.flat{background:var(--panel);border:1px solid var(--line)}
 .kpi .lab{font-size:12.5px;color:var(--ink2)}
-.kpi .val{font-family:"Barlow Semi Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:32px;line-height:1.05;font-variant-numeric:tabular-nums}
-.val.up{color:var(--up)} .val.down{color:var(--down)}
+.kpi .val{font-family:"Barlow Semi Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:32px;line-height:1.05;font-variant-numeric:tabular-nums;color:var(--ink)}
 .kpi .row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .chip{font-size:11.5px;font-weight:600;padding:1px 7px;border-radius:99px}
 .chip.up{color:var(--up);background:#e3f4ea} .chip.down{color:var(--down);background:#fbe9e5} .chip.flat{color:var(--ink3);background:#edf0f5}
@@ -31,32 +31,32 @@ h1{font-size:21px;margin:0;font-weight:700;color:var(--ink)}
 .concl b{color:var(--ink)}
 @media(max-width:620px){.kpis{grid-template-columns:1fr 1fr}}
 </style></head><body><div class="wrap">
-<header><div class="logo">🌍</div><h1>Hibay 增长周报</h1>
+<header><div class="logo">🚀</div><h1>Hibay 增长周报</h1>
 <div class="meta">统计周 <b>10/05–10/11</b> · 对比上周 · 神策 mojohi + 内容回收总表</div></header>
 
 <div class="sec-t">业务结果</div>
-<div class="kpis"><div class="kpi"><div class="lab">激活新增</div>
-<div class="val down">205</div>
-<div class="row"><span class="chip down">↓ 3.8%</span><span class="prev">上周 213</span></div></div><div class="kpi"><div class="lab">付费用户</div>
-<div class="val up">20</div>
-<div class="row"><span class="chip up">↑ 6</span><span class="prev">上周 14</span></div></div><div class="kpi"><div class="lab">GMV</div>
-<div class="val up">¥2,304</div>
-<div class="row"><span class="chip up">↑ 405.3%</span><span class="prev">上周 ¥456</span></div></div><div class="kpi"><div class="lab">ARPPU</div>
-<div class="val up">¥115</div>
+<div class="kpis"><div class="kpi down"><div class="lab">激活新增</div>
+<div class="val">205</div>
+<div class="row"><span class="chip down">↓ 3.8%</span><span class="prev">上周 213</span></div></div><div class="kpi up"><div class="lab">付费用户</div>
+<div class="val">20</div>
+<div class="row"><span class="chip up">↑ 6</span><span class="prev">上周 14</span></div></div><div class="kpi up"><div class="lab">GMV</div>
+<div class="val">¥2,304</div>
+<div class="row"><span class="chip up">↑ 405.3%</span><span class="prev">上周 ¥456</span></div></div><div class="kpi up"><div class="lab">ARPPU</div>
+<div class="val">¥115</div>
 <div class="row"><span class="chip up">↑ 253.7%</span><span class="prev">上周 ¥33</span></div></div></div>
 
 <div class="sec-t">内容营销</div>
-<div class="kpis"><div class="kpi"><div class="lab">发布条数</div>
-<div class="val up">66</div>
-<div class="row"><span class="chip up">↑ 50.0%</span><span class="prev">上周 44</span></div></div><div class="kpi"><div class="lab">爆文数</div>
-<div class="val down">3</div>
-<div class="row"><span class="chip down">↓ 1</span><span class="prev">上周 4</span></div></div><div class="kpi"><div class="lab">日本发帖占比</div>
-<div class="val up">51.5%</div>
-<div class="row"><span class="chip up">↑ 1.5pp</span><span class="prev">上周 50.0%</span></div></div><div class="kpi"><div class="lab">阅读换1新增</div>
-<div class="val up">565</div>
+<div class="kpis"><div class="kpi up"><div class="lab">发布条数</div>
+<div class="val">66</div>
+<div class="row"><span class="chip up">↑ 50.0%</span><span class="prev">上周 44</span></div></div><div class="kpi down"><div class="lab">爆文数</div>
+<div class="val">3</div>
+<div class="row"><span class="chip down">↓ 1</span><span class="prev">上周 4</span></div></div><div class="kpi up"><div class="lab">日本发帖占比</div>
+<div class="val">51.5%</div>
+<div class="row"><span class="chip up">↑ 1.5pp</span><span class="prev">上周 50.0%</span></div></div><div class="kpi down"><div class="lab">阅读换1新增</div>
+<div class="val">565</div>
 <div class="row"><span class="chip down">↑ 2.7%</span><span class="prev">上周 550</span></div></div></div>
 
 <div class="concl"><h2>本周结论</h2>
-<p><b>业务</b>　激活新增 205，环比 -3.755868544600939%，主要来源：泰国 82、其他 57、日本 37。付费用户 20 人（增 6），GMV ¥2,304（环比 +405.2631578947368%），ARPPU ¥115（上周 ¥33）。</p>
-<p><b>内容</b>　发布 66 条（环比 +50.0%），日本发帖占比 51.5%（Q4 目标 ≥50%），爆文 3 条，当周发布累计阅读 115,899，约 565 次阅读换 1 个新增（Q4 目标 <275）。</p></div>
+<p><b>业务：</b>激活新增 205，环比 -3.755868544600939%，主要来源：泰国 82、其他 57、日本 37。付费用户 20 人（增 6），GMV ¥2,304（环比 +405.2631578947368%），ARPPU ¥115（上周 ¥33）。</p>
+<p><b>内容：</b>发布 66 条（环比 +50.0%），日本发帖占比 51.5%（Q4 目标 ≥50%），爆文 3 条，当周发布累计阅读 115,899，约 565 次阅读换 1 个新增（Q4 目标 <275）。</p></div>
 </div></body></html>
